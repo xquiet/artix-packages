@@ -1,6 +1,5 @@
-# Maintainer: artoo <artoo@artixlinux.org>
-
-_url="https://raw.githubusercontent.com/gentoo/gentoo/master"
+# Maintainer: xquiet <matteo.pasotti@coriolite.com>
+# based on postfix-openrc
 
 pkgname=amavisd-new-openrc
 pkgver=20210723
