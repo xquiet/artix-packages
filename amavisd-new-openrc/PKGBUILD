@@ -1,0 +1,44 @@
+# Maintainer: artoo <artoo@artixlinux.org>
+
+_url="https://raw.githubusercontent.com/gentoo/gentoo/master"
+
+pkgname=amavisd-new-openrc
+pkgver=20210723
+pkgrel=2
+pkgdesc="OpenRC amavisd init script"
+arch=('any')
+url="https://github.com/artix-linux/packages"
+license=('GPL2')
+groups=('openrc-world')
+depends=('openrc' 'amavisd-new')
+conflicts=('systemd-sysvcompat')
+source=(
+	'amavisd.initd'
+	'amavisd.confd'
+)
+sha512sums=(
+	'a97643e0d8bd71f6fa931ce3bc64ffaf8a2ca229e589963cae180b303308f322b8e83a184aff7682199353ec02b1726ef534450d924ed1ebf61b1e9b59928ac8'
+	'a5ce3583c34197f335372728cf92da23bae2cd7a9ae48daff6eaadbf66fbd5be6bb8b480b0fce1ea2b3a662b0a54d1d2f1f277d2f9a06d9630b57fa5d7ac2635'
+)
+
+# pkgver() {
+# 	date +%Y%m%d
+# }
+
+_inst_initd(){
+    install -Dm755 ${srcdir}/$1.initd ${pkgdir}/etc/init.d/$1
+
+    sed -e 's|#!/sbin/openrc-run|#!/usr/bin/openrc-run|g' \
+        -e 's|/var/run|/run|g' \
+        -e 's|/usr/sbin|/usr/bin|g' \
+        -i ${pkgdir}/etc/init.d/$1
+}
+
+_inst_confd(){
+    install -Dm755 ${srcdir}/$1.confd ${pkgdir}/etc/conf.d/$1
+}
+
+package() {
+    _inst_initd 'amavisd'
+    _inst_confd 'amavisd'
+}

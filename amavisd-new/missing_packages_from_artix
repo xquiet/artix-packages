@@ -1,0 +1,5 @@
+ perl-convert-tnef
+  -> perl-convert-uulib>=1.4-5
+  -> perl-mime-tools
+  -> perl-net-libidn
+  -> perl-unix-syslog>=1.1-4
