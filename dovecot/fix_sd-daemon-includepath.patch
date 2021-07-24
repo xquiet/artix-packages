@@ -1,0 +1,23 @@
+diff --git a/trunk/PKGBUILD b/trunk/PKGBUILD
+index fda0a1f..1c96478 100644
+--- a/trunk/PKGBUILD
++++ b/trunk/PKGBUILD
+@@ -20,7 +20,7 @@ license=("LGPL")
+ 
+ depends=('krb5' 'openssl' 'sqlite' 'mariadb-libs' 'libsodium'
+          'postgresql-libs' 'bzip2' 'lz4' 'expat' 'curl' 'pam')
+-makedepends=('libcap' 'libldap' 'lua53' 'xz' 'clucene')
++makedepends=('libcap' 'libldap' 'lua53' 'xz' 'clucene' 'elogind')
+ optdepends=('libldap: ldap plugin'
+             'lua53: LUA auth and push support'
+             'clucene: alternative FTS indexer')
+@@ -54,6 +54,9 @@ prepare() {
+ 
+   # fix path in helper script
+   sed -i 's:OPENSSLCONFIG=${OPENSSLCONFIG-dovecot-openssl.cnf}:OPENSSLCONFIG=${OPENSSLCONFIG- /etc/ssl/dovecot-openssl.cnf}:' doc/mkcert.sh
++  
++  # fix systemd/sd-daemon path
++  sed -i 's|systemd/sd-daemon.h|elogind/systemd/sd-daemon.h|' src/master/{main.c,service-listen.c}
+ }
+ 
+ build() {
