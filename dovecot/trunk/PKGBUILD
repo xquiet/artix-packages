@@ -35,14 +35,18 @@ source=("https://dovecot.org/releases/2.3/${pkgname}-${pkgver}.tar.gz"{,.sig}
         'dovecot.sysusersd'
         'dovecot.tmpfilesd'
         'dovecot.ld.so.conf'
-        'dovecot.pam')
+        'dovecot.pam'
+	'dovecot-2.3.15-disable_test-cpu-limit.patch'
+        'dovecot-2.3.15-disable_imap-client-hibernate-test.patch')
 
 sha256sums=('21bbdd5d45957a99133de8b7e71813ecb73d9476c89dfc63479e9102b3553590'
             'SKIP'
             'c5e3a8ffe23e5deb4f7893d9877d972347c2ee45c4ebf713de85c537e47cfcaf'
             '0b0625b1e66ca6a95d506fd00d6a68e70620c8ea28606e2528953ffb1806b08e'
             'a457a1691cfa82495fc0503bfa4b61e54b149e63400fe0f568dff2c24a3f7858'
-            'ad9245f5e916480edd67139603cbe52e7a868233075f900ab63a0ce58f03741a')
+            'ad9245f5e916480edd67139603cbe52e7a868233075f900ab63a0ce58f03741a'
+            '1f9116462bccd80da7b9910f8d2c973cbe56742ca9cbb111f50691393f99f509'
+            '41318899f2711af328dda1cb1dc7e9af17197852e6a6f74ba8e5c2dfb724643e')
 
 validpgpkeys=(
   'E643F0BDFDCD04D9FFCB6279C948525140558AC9' # Timo Sirainen <tss@iki.fi>
@@ -57,6 +61,10 @@ prepare() {
   
   # fix systemd/sd-daemon path
   sed -i 's|systemd/sd-daemon.h|elogind/systemd/sd-daemon.h|' src/master/{main.c,service-listen.c}
+
+  pushd "${srcdir}/$pkgname-$pkgver"
+  patch -p1 < ../dovecot-2.3.15-disable_test-cpu-limit.patch
+  popd
 }
 
 build() {

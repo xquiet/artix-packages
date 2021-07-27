@@ -1,0 +1,91 @@
+--- dovecot-2.3.15/src/lib/Makefile.am.orig	2021-07-27 15:13:50.801829086 +0200
++++ dovecot-2.3.15/src/lib/Makefile.am	2021-07-27 15:14:09.445163507 +0200
+@@ -378,7 +378,6 @@
+ 	test-byteorder.c \
+ 	test-connection.c \
+ 	test-crc32.c \
+-	test-cpu-limit.c \
+ 	test-data-stack.c \
+ 	test-event-category-register.c \
+ 	test-event-filter.c \
+--- dovecot-2.3.15/src/lib/Makefile.in.orig	2021-07-27 15:14:23.435164316 +0200
++++ dovecot-2.3.15/src/lib/Makefile.in	2021-07-27 15:15:02.908499953 +0200
+@@ -216,7 +216,6 @@
+ 	test_lib-test-byteorder.$(OBJEXT) \
+ 	test_lib-test-connection.$(OBJEXT) \
+ 	test_lib-test-crc32.$(OBJEXT) \
+-	test_lib-test-cpu-limit.$(OBJEXT) \
+ 	test_lib-test-data-stack.$(OBJEXT) \
+ 	test_lib-test-event-category-register.$(OBJEXT) \
+ 	test_lib-test-event-filter.$(OBJEXT) \
+@@ -397,7 +396,6 @@
+ 	./$(DEPDIR)/test_lib-test-buffer.Po \
+ 	./$(DEPDIR)/test_lib-test-byteorder.Po \
+ 	./$(DEPDIR)/test_lib-test-connection.Po \
+-	./$(DEPDIR)/test_lib-test-cpu-limit.Po \
+ 	./$(DEPDIR)/test_lib-test-crc32.Po \
+ 	./$(DEPDIR)/test_lib-test-data-stack.Po \
+ 	./$(DEPDIR)/test_lib-test-event-category-register.Po \
+@@ -1153,7 +1151,6 @@
+ 	test-byteorder.c \
+ 	test-connection.c \
+ 	test-crc32.c \
+-	test-cpu-limit.c \
+ 	test-data-stack.c \
+ 	test-event-category-register.c \
+ 	test-event-filter.c \
+@@ -1465,7 +1462,6 @@
+ @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/test_lib-test-buffer.Po@am__quote@ # am--include-marker
+ @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/test_lib-test-byteorder.Po@am__quote@ # am--include-marker
+ @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/test_lib-test-connection.Po@am__quote@ # am--include-marker
+-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/test_lib-test-cpu-limit.Po@am__quote@ # am--include-marker
+ @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/test_lib-test-crc32.Po@am__quote@ # am--include-marker
+ @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/test_lib-test-data-stack.Po@am__quote@ # am--include-marker
+ @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/test_lib-test-event-category-register.Po@am__quote@ # am--include-marker
+@@ -1766,20 +1762,6 @@
+ @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+ @am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_lib_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o test_lib-test-crc32.obj `if test -f 'test-crc32.c'; then $(CYGPATH_W) 'test-crc32.c'; else $(CYGPATH_W) '$(srcdir)/test-crc32.c'; fi`
+ 
+-test_lib-test-cpu-limit.o: test-cpu-limit.c
+-@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_lib_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT test_lib-test-cpu-limit.o -MD -MP -MF $(DEPDIR)/test_lib-test-cpu-limit.Tpo -c -o test_lib-test-cpu-limit.o `test -f 'test-cpu-limit.c' || echo '$(srcdir)/'`test-cpu-limit.c
+-@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/test_lib-test-cpu-limit.Tpo $(DEPDIR)/test_lib-test-cpu-limit.Po
+-@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='test-cpu-limit.c' object='test_lib-test-cpu-limit.o' libtool=no @AMDEPBACKSLASH@
+-@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+-@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_lib_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o test_lib-test-cpu-limit.o `test -f 'test-cpu-limit.c' || echo '$(srcdir)/'`test-cpu-limit.c
+-
+-test_lib-test-cpu-limit.obj: test-cpu-limit.c
+-@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_lib_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT test_lib-test-cpu-limit.obj -MD -MP -MF $(DEPDIR)/test_lib-test-cpu-limit.Tpo -c -o test_lib-test-cpu-limit.obj `if test -f 'test-cpu-limit.c'; then $(CYGPATH_W) 'test-cpu-limit.c'; else $(CYGPATH_W) '$(srcdir)/test-cpu-limit.c'; fi`
+-@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/test_lib-test-cpu-limit.Tpo $(DEPDIR)/test_lib-test-cpu-limit.Po
+-@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='test-cpu-limit.c' object='test_lib-test-cpu-limit.obj' libtool=no @AMDEPBACKSLASH@
+-@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+-@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_lib_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o test_lib-test-cpu-limit.obj `if test -f 'test-cpu-limit.c'; then $(CYGPATH_W) 'test-cpu-limit.c'; else $(CYGPATH_W) '$(srcdir)/test-cpu-limit.c'; fi`
+-
+ test_lib-test-data-stack.o: test-data-stack.c
+ @am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(test_lib_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT test_lib-test-data-stack.o -MD -MP -MF $(DEPDIR)/test_lib-test-data-stack.Tpo -c -o test_lib-test-data-stack.o `test -f 'test-data-stack.c' || echo '$(srcdir)/'`test-data-stack.c
+ @am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/test_lib-test-data-stack.Tpo $(DEPDIR)/test_lib-test-data-stack.Po
+@@ -3162,7 +3144,6 @@
+ 	-rm -f ./$(DEPDIR)/test_lib-test-buffer.Po
+ 	-rm -f ./$(DEPDIR)/test_lib-test-byteorder.Po
+ 	-rm -f ./$(DEPDIR)/test_lib-test-connection.Po
+-	-rm -f ./$(DEPDIR)/test_lib-test-cpu-limit.Po
+ 	-rm -f ./$(DEPDIR)/test_lib-test-crc32.Po
+ 	-rm -f ./$(DEPDIR)/test_lib-test-data-stack.Po
+ 	-rm -f ./$(DEPDIR)/test_lib-test-event-category-register.Po
+@@ -3455,7 +3436,6 @@
+ 	-rm -f ./$(DEPDIR)/test_lib-test-buffer.Po
+ 	-rm -f ./$(DEPDIR)/test_lib-test-byteorder.Po
+ 	-rm -f ./$(DEPDIR)/test_lib-test-connection.Po
+-	-rm -f ./$(DEPDIR)/test_lib-test-cpu-limit.Po
+ 	-rm -f ./$(DEPDIR)/test_lib-test-crc32.Po
+ 	-rm -f ./$(DEPDIR)/test_lib-test-data-stack.Po
+ 	-rm -f ./$(DEPDIR)/test_lib-test-event-category-register.Po
+--- dovecot-2.3.15/src/lib/test-lib.inc.orig	2021-07-27 15:35:43.531905507 +0200
++++ dovecot-2.3.15/src/lib/test-lib.inc	2021-07-27 15:36:03.005239975 +0200
+@@ -16,7 +16,6 @@
+ TEST(test_byteorder)
+ TEST(test_connection)
+ TEST(test_crc32)
+-TEST(test_cpu_limit)
+ TEST(test_data_stack)
+ FATAL(fatal_data_stack)
+ TEST(test_event_category_register)
