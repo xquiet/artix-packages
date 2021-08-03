@@ -1,0 +1,43 @@
+# Maintainer: xquiet <matteo.pasotti@coriolite.com>
+# based on amavisdnew-openrc
+
+pkgname=opendkim-openrc
+pkgver=20210803
+pkgrel=1
+pkgdesc="OpenRC opendkim init script"
+arch=('any')
+url="https://github.com/artix-linux/packages"
+license=('GPL2')
+groups=('openrc-world')
+depends=('openrc' 'opendkim')
+conflicts=('systemd-sysvcompat')
+source=(
+	'opendkim.initd'
+	'opendkim.confd'
+)
+sha512sums=(
+	'45a9faed85d775ee335cf2dd310b84bf4a2a7ea837face0cde3260d7d9c6cc70284727c923a09fe5340d7b62c13e04fffb05acd0e453ab378fc2b4ad271592f2'
+	'07d6b013536b7ab4f945d1324e321eba560bc23c807060295d4aa62c2e5ab64510f6ea34b2dceb5d4269bac0126d503f10090ef03faec9dcbaf4f10818718301'
+)
+
+# pkgver() {
+# 	date +%Y%m%d
+# }
+
+_inst_initd(){
+    install -Dm755 ${srcdir}/$1.initd ${pkgdir}/etc/init.d/$1
+
+    sed -e 's|#!/sbin/openrc-run|#!/usr/bin/openrc-run|g' \
+        -e 's|/var/run|/run|g' \
+        -e 's|/usr/sbin|/usr/bin|g' \
+        -i ${pkgdir}/etc/init.d/$1
+}
+
+_inst_confd(){
+    install -Dm755 ${srcdir}/$1.confd ${pkgdir}/etc/conf.d/$1
+}
+
+package() {
+    _inst_initd 'opendkim'
+    _inst_confd 'opendkim'
+}

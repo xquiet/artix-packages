@@ -1,0 +1,4 @@
+# opendkim conf.d
+
+user="opendkim"
+group="opendkim"
