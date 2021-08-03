@@ -1,0 +1,6 @@
+# opendmarc conf.d
+
+# user/group to run opendmarc daemon as
+OPENDMARC_USER=opendmarc
+OPENDMARC_GROUP=mail
+

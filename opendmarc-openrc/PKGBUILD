@@ -1,0 +1,43 @@
+# Maintainer: xquiet <matteo.pasotti@coriolite.com>
+# based on amavisdnew-openrc
+
+pkgname=opendmarc-openrc
+pkgver=20210803
+pkgrel=2
+pkgdesc="OpenRC opendmarc init script"
+arch=('any')
+url="https://github.com/artix-linux/packages"
+license=('GPL2')
+groups=('openrc-world')
+depends=('openrc' 'opendmarc')
+conflicts=('systemd-sysvcompat')
+source=(
+	'opendmarc.initd'
+	'opendmarc.confd'
+)
+sha512sums=(
+	'a9cf96714e6ff947e8f6ac4d66ef970daa49c9d368990d1946ce732ab09480a7fab1ea6ae90fe2453419bc680222489767afcb53b67e9d34f1aa47ce25136959'
+	'7882f865ae600480170d52ec967b488d743f01cecd984a41f2331b97b2e2f7bf1badb4ae40f22a268c4968e9e81566fed5e77be2115dc081b2de3ab765beada5'
+)
+
+# pkgver() {
+# 	date +%Y%m%d
+# }
+
+_inst_initd(){
+    install -Dm755 ${srcdir}/$1.initd ${pkgdir}/etc/init.d/$1
+
+    sed -e 's|#!/sbin/openrc-run|#!/usr/bin/openrc-run|g' \
+        -e 's|/var/run|/run|g' \
+        -e 's|/usr/sbin|/usr/bin|g' \
+        -i ${pkgdir}/etc/init.d/$1
+}
+
+_inst_confd(){
+    install -Dm755 ${srcdir}/$1.confd ${pkgdir}/etc/conf.d/$1
+}
+
+package() {
+    _inst_initd 'opendmarc'
+    _inst_confd 'opendmarc'
+}
